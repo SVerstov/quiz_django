@@ -48,15 +48,14 @@ class QuizAdmin(NestedModelAdmin):
         return all([formset.is_valid() for formset in formsets])
 
     def all_valid_with_nesting(self, formsets):
-        "Recursively validate all nested formsets"
         if not self.all_valid(formsets):
             return False
 
+
         for formset in formsets:
             if 'QuizAnswer' in str(type(formset)):
-                if not self.additionl_validate(formset, formsets):
+                if not self.additional_answers_validate(formset):
                     return False
-            # print('formset ',type(formset))
             if not formset.is_bound:
                 pass
             for form in formset:
@@ -69,20 +68,34 @@ class QuizAdmin(NestedModelAdmin):
                     if (not hasattr(form, 'cleaned_data') or not form.cleaned_data) and \
                             self.formset_has_nested_data(form.nested_formsets):
                         form._errors["__all__"] = form.error_class(
-                            [u"Parent object must be created when creating nested inlines."]
+                            [u"Напишите вопрос"]
                         )
                         return False
         return True
 
     @staticmethod
-    def additionl_validate(formset, formsets):
+    def additional_answers_validate(formset):
+        """ This method validate answers amount and correct answers amount"""
 
-        def _get_error_msg(msg):
-            return formset[0].error_class([msg])
+        question = formset.instance.question
+        if not question:
+            # in this case wokrs another validator
+            return True
 
-        if formset.instance.question and not formset.cleaned_data[0]:
-            formset[0]._errors["__all__"] = _get_error_msg('Необxодимо добавить хотя бы 2 ответа')
+        answers = list(filter(lambda x: x , formset.cleaned_data))
+        correct_answers_amount: int = len(list(filter(lambda x: x.get('is_correct'), answers)))
+        answers_amount = len(answers)
+        errors = []
 
+        if correct_answers_amount == 0:
+            errors.append('Хотя бы один варинант должен быть правильный')
+        if correct_answers_amount == answers_amount:
+            errors.append('Все варианты не могут быть правильными')
+        if answers_amount < 2:
+            errors.append('Должно быть хотя бы 2 варианта ответов')
+
+        if errors:
+            formset[0].errors["__all__"] = formset[0].error_class(errors)
             return False
         return True
 

@@ -1,0 +1,13 @@
+{% load quiz_list %}
+
+<div class="list-group mb-3">
+
+    {% for quiz in quiz_list %}
+
+            <a href="/quiz/{{quiz.pk}}/" class="list-group-item list-group-item-action" aria-current="true">
+                {{ quiz.title }}
+            </a>
+
+
+    {% endfor %}
+</div>

@@ -22,11 +22,6 @@ class Quiz(models.Model):
     def __str__(self):
         return self.title
 
-    def clean(self):
-        pass
-
-    def clean_fields(self, exclude=None):
-        pass
 
 
 
@@ -62,10 +57,6 @@ class QuizAnswer(models.Model):
     class Meta:
         verbose_name = 'Ответ'
         verbose_name_plural = 'Ответы'
-
-    def clean(self):
-        """ ANSWER"""
-        pass
 
 
 class UserStats(models.Model):

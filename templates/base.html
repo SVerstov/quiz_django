@@ -1,0 +1,83 @@
+{% load quiz_list %}
+{% load static %}
+
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <style>
+      .img-left {
+          margin: 10px 20px 10px 0;
+          float: left;
+          max-width: 30% !important;
+      }
+
+  </style>
+
+  <title>{% block title %}
+    Тесты
+  {% endblock %}</title>
+</head>
+<body>
+
+<!-- Option 1: Bootstrap -->
+
+
+{#        NAVBAR #}
+{% include 'navbar.html' %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xxl-1"></div>
+    <div class="col-xl-2 col-lg-3 col-md-3">
+      {% show_quiz_list %}
+    </div>
+    <div class="col-xxl-8 col-xl-10 col-lg-9 col-md-9">
+
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'error' %}
+            <div class="alert alert-danger"> {{ message }}</div>
+          {% else %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+
+      {% block сard %}
+        <div class="card mb-3">
+        <div class="card-header">
+          {% block sub_title %}
+            Заголовок block sub_title
+          {% endblock %}
+        </div>
+        <div class="card-body">
+
+          {% block content %}
+            Контент block content
+          {% endblock %}
+        </div>
+      {% endblock %}
+
+
+      <div class="col-xxl-1"></div>
+      </div>
+
+      {% block new_card %}
+      {% endblock %}
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+              integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+              crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+

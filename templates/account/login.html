@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block sub_title %}
+    Логин
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h5> Вы авторизованны как, <b>{{ request.user.username }}</b> |
+            <a href="{% url 'logout' %}">Выйти?</a></h5>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">ЛОГИН</button>
+        </form>
+    {% endif %}
+
+
+
+{% endblock %}
