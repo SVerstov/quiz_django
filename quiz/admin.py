@@ -30,6 +30,7 @@ class QuizAdmin(NestedModelAdmin):
     # добавляет эти поля в админку приложения
     # list_display = ('title','description','pass_score')
     model = Quiz
+
     inlines = [QuestionInLine]
     readonly_fields = ('owner', 'created_at', 'updated_at')
 
@@ -72,6 +73,7 @@ class QuizAdmin(NestedModelAdmin):
                         )
                         return False
         return True
+
 
     @staticmethod
     def additional_answers_validate(formset):

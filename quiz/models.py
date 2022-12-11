@@ -22,6 +22,9 @@ class Quiz(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "тест"
+        verbose_name_plural = "тесты"
 
 
 
