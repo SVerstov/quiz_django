@@ -1,9 +1,11 @@
 from django.urls import path
 
-from .views import quiz_main, ViewQuiz
+from .views import quiz_main, start_quiz, history, quiz_about
 
 urlpatterns = [
     path('', quiz_main, name='quizes'),
-    path('<int:pk>/', ViewQuiz.as_view(), name='quiz'),
-    # path('register', register, name='register'),
+    path('<int:pk>/', quiz_about, name='quiz_about'),
+    path('<int:pk>/start/', start_quiz, name='quiz'),
+    path('history/', history, name='history'),
+
 ]

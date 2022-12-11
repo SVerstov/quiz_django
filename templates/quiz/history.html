@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block sub_title %}
+  История тестирования
+{% endblock %}
+
+{% block content %}
+  {% for record in history %}
+    <p>Тест: {{ record.quiz }}</p>
+    <p>{{ record.created_at }}</p>
+        <p>Правильных ответов {{ record.correct_answers }} из {{ record.total_answers }}</p>
+        {% if record.is_passed %}
+          <p class="text-success">Тест сдан!</p>
+        {% else %}
+          <p class="text-danger">Тест не сдан :(</p>
+      {% endif %}
+    <hr>
+  {% endfor %}
+{% endblock %}

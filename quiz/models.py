@@ -72,7 +72,7 @@ class UserStats(models.Model):
 class UserAnswers(models.Model):
     """ текущие ответы пользователя (незавершённые тесты)"""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    # quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question = models.ForeignKey(QuizQuestion, on_delete=models.CASCADE)
-    answer = models.ForeignKey(QuizAnswer, on_delete=models.CASCADE)
-    user_answer = models.BooleanField('Ответ пользователя')
+    # answer = models.ForeignKey(QuizAnswer, on_delete=models.CASCADE)
+    is_correct = models.BooleanField(default=False)

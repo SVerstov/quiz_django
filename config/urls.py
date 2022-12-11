@@ -19,7 +19,6 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from quiz.views import show_test_form
 
 urlpatterns = [
     path('', lambda r: redirect('quizes'), name='home'),

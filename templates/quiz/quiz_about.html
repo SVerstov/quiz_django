@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block sub_title %}
+  Тест: {{ quiz.title }}
+{% endblock %}
+
+{% block content %}
+  <p>{{ quiz.description }}</p>
+
+  <p>Количество вопросов: {{ count }}</p>
+  <p>Необходимый результат: {{ quiz.pass_score }}%</p>
+
+
+
+  {% if request.user.is_authenticated %}
+    <button type="submit" onclick="location.href='start/'" class="btn btn-primary">Начать тест</button>
+  {% else %}
+    <p class="text-danger">Для прохождения теста зарегистрируйтесь или войдите на сайт!</p>
+
+  {% endif %}
+{% endblock %}

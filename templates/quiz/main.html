@@ -2,9 +2,13 @@
 
 
 {% block sub_title %}
-    Тесты
+  Тесты
 {% endblock %}
 
 {% block content %}
-    Выберите тест
+  {% if request.user.is_authenticated %}
+    Выберите тест из списка слева
+  {% else %}
+    Для прохождения теста зарегистрируйтесь или войдите на сайт
+  {% endif %}
 {% endblock %}
