@@ -24,7 +24,8 @@ urlpatterns = [
     path('', lambda r: redirect('quizes'), name='home'),
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
-    path('quiz/', include('quiz.urls'))
+    path('quiz/', include('quiz.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 if settings.DEBUG:

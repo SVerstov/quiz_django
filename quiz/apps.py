@@ -6,3 +6,6 @@ class QuizConfig(AppConfig):
     name = 'quiz'
     verbose_name = "Тесты"
     verbose_name_plural = "Тесты"
+
+    def ready(self):
+        from quiz import signals
