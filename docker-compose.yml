@@ -1,6 +1,19 @@
-  services:
-    redis:
-      image: redis:7.0.7-alpine
-      hostname: redis
-      ports:
-        - "6379:6379"
+services:
+  redis:
+    image: redis:7.0.7-alpine
+    hostname: redis
+    ports:
+      - "6379:6379"
+
+  worker:
+    build:
+      context: .
+    hostname: worker
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    volumes:
+      - .:/app
+    links:
+      - redis
+    depends_on:
+      - redis

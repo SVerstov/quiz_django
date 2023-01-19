@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import quiz_main, start_quiz, history, quiz_about
+from quiz.views import quiz_main, start_quiz, history, quiz_about
 
 urlpatterns = [
     path('', quiz_main, name='quizes'),

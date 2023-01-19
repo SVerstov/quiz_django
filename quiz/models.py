@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 class Quiz(models.Model):
     title = models.CharField('Название теста', max_length=200)
     description = models.TextField('Описание', max_length=2000, blank=True)
-    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     pass_score = models.PositiveIntegerField(help_text='Минимальный результат (в процентах) для прохождения теста',
                                              default=60,
                                              validators=[

@@ -12,7 +12,8 @@
     {% for answer in answers %}
       <input type="hidden" name="question_id" value="{{ question.pk }}">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="answer{{ answer.pk }}" name="answer_{{ answer.pk }}"
+        <input class="form-check-input" type="checkbox" isCorrect="{{ answer.is_correct }}"
+               value="answer{{ answer.pk }}" name="answer_{{ answer.pk }}"
                id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
           {{ answer.text }}
@@ -21,19 +22,36 @@
     {% endfor %}
 
     <button id='answerbtn' type="submit" class="btn btn-primary mt-3">Ответить</button>
+    <button id='fillAnswers' type="button" class="btn btn-primary mt-3">Заполнить ответы</button>
   </form>
 
   <script>
       function validate(event) {
           checkboxes = document.getElementsByClassName('form-check-input')
-          for (checkbox of checkboxes) {
+          for (let checkbox of checkboxes) {
               if (checkbox.checked) return
           }
           event.preventDefault()
           errorText.hidden = false
       }
 
+
+      function fillCorrectAnswers() {
+          checkboxes = document.getElementsByClassName('form-check-input')
+          for (let checkbox of checkboxes) {
+              {#if (checkbox.getPropertyValue('isCorrect') == 'True') {#}
+              checkbox.checked = true
+              }
+          }
+
+
+      }
+
       answerbtn.addEventListener("click", validate)
+      fillAnswers.addEventListener("click", fillCorrectAnswers)
+
+
+
   </script>
 
 {% endblock %}
