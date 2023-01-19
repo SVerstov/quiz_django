@@ -79,7 +79,7 @@ def _check_and_save_answers(request, question: QuizQuestion):
 
 @login_required(login_url='login')
 def history(request):
-    history_list = UserStats.objects.filter(user=request.user)
+    history_list = UserStats.objects.filter(user=request.user).values()
     return render(request, 'quiz/history.html', {'history': history_list})
 
 
