@@ -37,19 +37,16 @@
 
 
       function fillCorrectAnswers() {
-          checkboxes = document.getElementsByClassName('form-check-input')
+          let checkboxes = document.getElementsByClassName('form-check-input')
           for (let checkbox of checkboxes) {
-              {#if (checkbox.getPropertyValue('isCorrect') == 'True') {#}
-              checkbox.checked = true
+              if (checkbox.getAttribute('isCorrect') == 'True') {
+                  checkbox.checked = true
               }
           }
-
-
       }
 
-      answerbtn.addEventListener("click", validate)
-      fillAnswers.addEventListener("click", fillCorrectAnswers)
-
+      answerbtn.addEventListener("click", validate);
+      fillAnswers.addEventListener("click", fillCorrectAnswers);
 
 
   </script>

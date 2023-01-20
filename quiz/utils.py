@@ -4,7 +4,6 @@ from string import ascii_letters, digits
 import lorem
 from django.contrib.auth.models import User
 from celery import shared_task
-from django_celery_beat.models import PeriodicTask
 
 
 @shared_task()
